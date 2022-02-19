@@ -1,27 +1,20 @@
 import { Link } from 'react-router-dom';
 
 function Header(props) {
-
-    const spacer = ` | `;
+	const spacer = ` | `;
 
 	return (
-		<div className="App">
-			<div>
-				<h1>Fakebiz</h1>
-				<h1>Cart {props.numItems}</h1>
-			</div>
-			<nav
-				style={{
-					borderBottom: 'solid 1px',
-					paddingBottom: '1rem',
-				}}>
+		<header className="row">
+			<h1>Fakebiz</h1>
+			<nav>
 				<Link to="/">Home</Link>
-                {spacer} 
-                <Link to="/products">Products</Link>
-                {spacer}
-			    <Link to="/contact">Contact</Link>
+				{spacer}
+				<Link to="/products">Products</Link>
+				{spacer}
+				<Link to="/contact">Contact</Link>
 			</nav>
-		</div>
+			<h6>Cart: {props.numItems}</h6>
+		</header>
 	);
 }
 
