@@ -46,9 +46,11 @@ export default function Products() {
 	]);
 
 	const [shoppingCartItems, setShoppingCartItem] = useState([]);
+	const [shoppingCartNumberOfItems, setShoppingCartNumberOfItems] = useState(0);
 
     useEffect ( () => { 
         console.log(shoppingCartItems)
+        setShoppingCartNumberOfItems(shoppingCartItems.length);
     }, [shoppingCartItems] );
 
     function addToCart(newItem) {
@@ -60,7 +62,7 @@ export default function Products() {
 
 	return (
 		<>
-			<Header />
+			<Header numItems={shoppingCartNumberOfItems}/>
 			{/* <Cart items={shoppingCartItems}/> */}
 			<h2>Products</h2>
 			<main className="grid">

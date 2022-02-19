@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Header(props) {
 
     const spacer = ` | `;
 
 	return (
 		<div className="App">
-			<h1>Fakebiz</h1>
+			<div>
+				<h1>Fakebiz</h1>
+				<h1>Cart {props.numItems}</h1>
+			</div>
 			<nav
 				style={{
 					borderBottom: 'solid 1px',
