@@ -1,14 +1,22 @@
 import CartItem from './cartItem';
+import "../App.css"
 
 export default function Cart(props) {
+
+	const {items} = props;
+	
+	function closeCart() {
+		document.getElementById('cart').style.display = 'none';
+	}
+
 	return (
-		<div>
-			{props.items.map((item) => {
+		<div id="cart">
+			<button onClick={() => closeCart()}>Close</button>
+			<h2>Cart</h2>
+			{items.map((item) => {
 				return (
 					<CartItem
-						name={item.name}
-						price={item.price}
-						quantity={item.quantity}
+						itemInfo={item}
 					/>
 				);
 			})}

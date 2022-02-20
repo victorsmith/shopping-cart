@@ -2,10 +2,9 @@ import '../App.css'
 
 export default function CartItem(props) {
 	return (
-		<div>
-			<h1>{props.itemInfo.name}</h1>
-			<h2>{props.itemInfo.price}</h2>
-			<h2>{props.itemInfo.quantity}</h2>
+		<div className='cart-item'>
+			<h6>{props.itemInfo.name}</h6>
+			<p>Price: {props.itemInfo.price} | Quantity: {props.itemInfo.quantity}</p>
 		</div>
 	);
 }

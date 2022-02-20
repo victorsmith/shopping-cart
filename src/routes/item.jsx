@@ -1,8 +1,7 @@
 import '../App.css';
-
 export default function Item(props) {
 	return (
-		<div className="card">
+		<div className="product-card">
 			<h5>{props.itemInfo.name}</h5>
 			<h6>
 				Price: {props.itemInfo.price} | Quantity:{' '}
