@@ -4,7 +4,7 @@ import "../App.css"
 export default function Cart(props) {
 
 	const {items} = props;
-	const { incrementFcn, decrementFcn } = props;
+	const { incrementFcn, decrementFcn, removeItemFcn } = props;
 	
 	function closeCart() {
 		document.getElementById('cart').style.display = 'none';
@@ -17,9 +17,11 @@ export default function Cart(props) {
 			{items.map((item) => {
 				return (
 					<CartItem
+						key={item.id}
 						itemInfo={item}
 						increment={incrementFcn}
 						decrement={decrementFcn}
+						removeItem={removeItemFcn}
 					/>
 				);
 			})}

@@ -1,29 +1,35 @@
 import '../App.css';
 
 export default function CartItem(props) {
-	return (
-		<div className="cart-item">
-			<h6>{props.itemInfo.name}</h6>
-			<p>Price: {props.itemInfo.price}</p>
-			<span>
-				<button
-					onClick={() => {
-						console.log('Target -: ' + props.itemInfo.id);
-						props.decrement(props.itemInfo);
-					}}
-				>
-					-
+	const { itemInfo, decrement, increment, removeItem} = props;
+
+	if (itemInfo.quantity > 0) {
+		return (
+			<div className="cart-item">
+				<h6>{itemInfo.name}</h6>
+				<p>Price: {itemInfo.price}</p>
+				
+				<button onClick={ () => removeItem(itemInfo) }>
+					Delete
 				</button>
-				<span>Quantity: {props.itemInfo.quantity}</span>
-				<button
-					onClick={() => {
-						console.log('Target +: ' + props.itemInfo.id);
-						props.increment(props.itemInfo);
-					}}
-				>
-					+
-				</button>
-			</span>
-		</div>
-	);
+
+				<span>
+					<button
+						onClick={() => { decrement(itemInfo) }}>
+						-
+					</button>
+					<span>Quantity: {itemInfo.quantity}</span>
+					<button
+						onClick={() => { increment(itemInfo) }}>
+						+
+					</button>
+				</span>
+			</div>
+		);
+	} 
+	else {
+		return (
+			<></>
+		)
+	}
 }

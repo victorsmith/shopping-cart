@@ -52,6 +52,7 @@ function App() {
 	]);
 
 
+	
 	function addToCart(newItem) {
 		// alert("It worked")
 		for (let x = 0; x < cart.length; x++) {
@@ -59,10 +60,28 @@ function App() {
 				let newCart = [...cart];
 				newCart[x].quantity += 1;
 				setCartItem(newCart);
-				return
-			} 
-		} 
+				return;
+			}
+		}
+
+		newItem.quantity = 1;
 		setCartItem(cart.concat(newItem));
+	}
+
+
+
+	function removeFromCart(item) {
+		for (let x = 0; x < cart.length; x++) {
+			if (cart[x] === item) {
+				let newCart = [...cart];
+				const index = newCart.indexOf(item);
+				if (index > -1) {
+					newCart.splice(index, 1); // 2nd parameter means remove one item only
+				}
+				setCartItem(newCart);
+				return;
+			}
+		}
 	}
 
 
@@ -71,39 +90,46 @@ function App() {
 	}
 
 
-	function decrementQuantity (itemId) {
+
+	function decrementQuantity(itemId) {
 		for (let x = 0; x < cart.length; x++) {
 			if (cart[x] === itemId) {
-				if (cart[x].quantity === 0 ) {
-					alert("Ooops! Quantity is already at zero")
-					return
+				if (cart[x].quantity === 0) {
+					alert('Delete Item');
+					return;
 				} else {
 					let newCart = [...cart];
 					newCart[x].quantity -= 1;
 					setCartItem(newCart);
 				}
 			}
+		}
+	}
 
-		} 
-	}	
-	
+
+
 	function incrementQuantity(itemId) {
-		for (let x=0; x<cart.length; x++) {
-			if ( cart[x] ===  itemId ) {
+		for (let x = 0; x < cart.length; x++) {
+			if (cart[x] === itemId) {
 				let newCart = [...cart];
 				newCart[x].quantity += 1;
 				setCartItem(newCart);
 			}
-		} 
+		}
 	}
 
 
-	useEffect( () => {
+
+	useEffect(() => {
 		console.log(cart);
-	}, [cart])
+	}, [cart]);
+
 
 
 	const spacer = ' | ';
+
+
+
 	return (
 		<BrowserRouter>
 			<div className="App">
@@ -121,10 +147,12 @@ function App() {
 					</button>
 				</header>
 
-				<Cart 
+				<Cart
 					items={cart}
 					incrementFcn={incrementQuantity}
-					decrementFcn={decrementQuantity}/>
+					decrementFcn={decrementQuantity}
+					removeItemFcn={removeFromCart}
+				/>
 
 				<Routes>
 					<Route path="/" element={<Home />} />
