@@ -9,18 +9,10 @@ import {
 
 // Routes
 import App from './App';
-import Products from './routes/products';
-import Contact from './routes/contact';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<App />}/>
-				<Route path='products' element={<Products/>}/>
-				<Route path='contact' element={<Contact/>}/>
-			</Routes>
-		</BrowserRouter>
+		<App></App>
 	</React.StrictMode>,
 	document.getElementById('root')
 );

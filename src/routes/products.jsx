@@ -1,71 +1,18 @@
 import { useEffect, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 import Cart from './cart';
 import Header from './header';
 import Item from './item';
-import { v4 as uuid } from 'uuid';
 import '../App.css';
 
-export default function Products() {
-	const [availableItems, setAvailableItem] = useState([
-		{
-			name: 'Fakebiz T-Shirt',
-			price: 80,
-			quantity: 0,
-			id: uuid(),
-		},
-		{
-			name: 'Fakebiz Hoodie',
-			price: 40,
-			quantity: 0,
-			id: uuid(),
-		},
-		{
-			name: 'Fakebiz Fake Rolex',
-			price: 5000,
-			quantity: 0,
-			id: uuid(),
-		},
-		{
-			name: 'Fakebiz Fake Gucci Flipflops',
-			price: 9.99,
-			quantity: 0,
-			id: uuid(),
-		},
-		{
-			name: 'Fakebiz Unreasonably Priced Sneakers',
-			price: 400,
-			quantity: 0,
-			id: uuid(),
-		},
-		{
-			name: 'Fakebiz Intrinsicly Worthless Diamonds',
-			price: 1000,
-			quantity: 0,
-			id: uuid(),
-		},
-	]);
+export default function Products(props) {
 
-	const [shoppingCartItems, setShoppingCartItem] = useState([]);
-	const [shoppingCartNumberOfItems, setShoppingCartNumberOfItems] = useState(0);
-
-    useEffect ( () => { 
-        console.log(shoppingCartItems)
-        setShoppingCartNumberOfItems(shoppingCartItems.length);
-    }, [shoppingCartItems] );
-
-    function addToCart(newItem) {
-        // alert("It worked")
-        setShoppingCartItem(
-            shoppingCartItems.concat(newItem)
-        )
-    }
+	const {availableItems, addToCart} = props;
 
 	return (
-		<>
-			<Header numItems={shoppingCartNumberOfItems}/>
-			{/* <Cart items={shoppingCartItems}/> */}
+		<div>
 			<h2>Products</h2>
-			<main className="grid">
+			<main className="products-grid">
 				{availableItems.map((availableItem) => {
 					return (
 						<Item
@@ -76,6 +23,6 @@ export default function Products() {
 					);
 				})}
 			</main>
-		</>
+		</div>
 	);
 }
