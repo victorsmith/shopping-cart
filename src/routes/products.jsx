@@ -1,7 +1,3 @@
-import { useEffect, useState } from 'react';
-import { v4 as uuid } from 'uuid';
-import Cart from './cart';
-import Header from './header';
 import Item from './item';
 import '../App.css';
 

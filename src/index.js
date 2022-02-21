@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { 
-  BrowserRouter, 
-  Routes, 
-  Route 
-} from 'react-router-dom';
 
-// Routes
+import 'typeface-poppins';
+
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App></App>
+		<BrowserRouter>
+			<App></App>
+		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById('root')
 );

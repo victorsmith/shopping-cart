@@ -1,25 +1,35 @@
 .App {
   text-align: center;
   display: grid;
-  grid-template-rows: 150px 400px;
+  grid-template-rows: 150px auto;
+  font-family: Poppins;
 }
-
 
 header {
   background-color: rgb(6, 89, 138);
+  
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  justify-items: center;
+  align-items: center;
 }
 
+header .header-right {
+    
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  justify-items: center;
+  align-items: center;
 
+}
 
-/* Products Section */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
-
-
-/* Product Card */
 .product-card {
   display: flex;
   flex-direction: column;
@@ -41,9 +51,6 @@ header {
   text-align: left;
 }
 
-
-
-/* Cart */
 #cart {
   background-color: rgba(255, 0, 0, 0.658);
   width: 500px;
@@ -53,9 +60,6 @@ header {
   display: block;
 }
 
-
-
-/* Cart Item */
 .cart-item {
   display: flex;
   flex-direction: column;
@@ -68,4 +72,10 @@ header {
 .cart-item h6 {
   font-size: 1rem;
   margin: 10px 0;
+}
+
+#burger {
+  height: 24px;
+  width: 24px;
+  color: whitesmoke;
 }

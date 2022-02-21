@@ -1,16 +1,25 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
+
+
+// Styles
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from './global';
+import { theme } from './theme';
+import { useOnClickOutside } from './hooks';
+import { Burger, Menu } from './components';
+import FocusLock from 'react-focus-lock';
 
 // Components
 import Home from './routes/home';
 import Products from './routes/products';
 import Contact from './routes/contact';
 import Cart from './routes/cart';
+import Team from './routes/team';
 
 function App() {
-	// State
 	const [cart, setCartItem] = useState([]);
 	const [products, setProductItem] = useState([
 		{
@@ -49,10 +58,74 @@ function App() {
 			quantity: 0,
 			id: uuid(),
 		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
+		{
+			name: 'Diamonds',
+			price: 1000,
+			quantity: 0,
+			id: uuid(),
+		},
 	]);
 
-
-	
 	function addToCart(newItem) {
 		// alert("It worked")
 		for (let x = 0; x < cart.length; x++) {
@@ -68,8 +141,6 @@ function App() {
 		setCartItem(cart.concat(newItem));
 	}
 
-
-
 	function removeFromCart(item) {
 		for (let x = 0; x < cart.length; x++) {
 			if (cart[x] === item) {
@@ -84,12 +155,9 @@ function App() {
 		}
 	}
 
-
 	function openCart() {
 		document.getElementById('cart').style.display = 'block';
 	}
-
-
 
 	function decrementQuantity(itemId) {
 		for (let x = 0; x < cart.length; x++) {
@@ -106,8 +174,6 @@ function App() {
 		}
 	}
 
-
-
 	function incrementQuantity(itemId) {
 		for (let x = 0; x < cart.length; x++) {
 			if (cart[x] === itemId) {
@@ -118,58 +184,64 @@ function App() {
 		}
 	}
 
-
-
 	useEffect(() => {
 		console.log(cart);
 	}, [cart]);
-
-
 
 	const spacer = ' | ';
 
 
 
-	return (
-		<BrowserRouter>
-			<div className="App">
-				<header>
-					<h1>Fakebiz</h1>
-					<nav>
-						<Link to="/">Home</Link>
-						{spacer}
-						<Link to="/products">Products</Link>
-						{spacer}
-						<Link to="/contact">Contact</Link>
-					</nav>
-					<button onClick={() => openCart()}>
-						Cart: {cart.length}
-					</button>
-				</header>
+		const [open, setOpen] = useState(false);
+		const node = useRef();
+		const menuId = 'main-menu';
+		useOnClickOutside(node, () => setOpen(false));
 
-				<Cart
-					items={cart}
-					incrementFcn={incrementQuantity}
-					decrementFcn={decrementQuantity}
-					removeItemFcn={removeFromCart}
-				/>
+		return (
+			<ThemeProvider theme={theme}>
+				<GlobalStyles />
 
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route
-						path="/products"
-						element={
-							<Products
-								availableItems={products}
-								addToCart={addToCart}
+				<div ref={node}>
+					<FocusLock disabled={!open}>
+						<Burger
+							open={open}
+							setOpen={setOpen}
+							aria-controls={menuId}
+						/>
+						<Menu open={open} setOpen={setOpen} id={menuId} />
+					</FocusLock>
+				</div>
+				<div>
+					<h1>Fake Buisness</h1>
+				</div>
+
+				<BrowserRouter>
+					<div className="App">
+						{/* <Cart
+							items={cart}
+							incrementFcn={incrementQuantity}
+							decrementFcn={decrementQuantity}
+							removeItemFcn={removeFromCart}
+						/> */}
+
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route
+								exact path="/products"
+								element={
+									<Products
+										availableItems={products}
+										addToCart={addToCart}
+									/>
+								}
 							/>
-						}
-					/>
-					<Route path="/contact" element={<Contact />} />
-				</Routes>
-			</div>
-		</BrowserRouter>
-	);
+							<Route path="/team" element={<Team />} />
+							<Route path="/contact" element={<Contact />} />
+						</Routes>
+					</div>
+				</BrowserRouter>
+			</ThemeProvider>
+		);
 }
 
 export default App;
