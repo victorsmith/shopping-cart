@@ -51,14 +51,51 @@ function App() {
 		},
 	]);
 
+
 	function addToCart(newItem) {
 		// alert("It worked")
+		for (let x = 0; x < cart.length; x++) {
+			if (cart[x] === newItem) {
+				let newCart = [...cart];
+				newCart[x].quantity += 1;
+				setCartItem(newCart);
+				return
+			} 
+		} 
 		setCartItem(cart.concat(newItem));
 	}
+
 
 	function openCart() {
 		document.getElementById('cart').style.display = 'block';
 	}
+
+
+	function incrementQuantity (itemId) {
+		for (let x = 0; x < cart.length; x++) {
+			if (cart[x] === itemId) {
+				let newCart = [...cart];
+				newCart[x].quantity += 1;
+				setCartItem(newCart);
+			}
+		} 
+	}	
+	
+	function decrementQuantity(itemId) {
+		for (let x=0; x<cart.length; x++) {
+			if ( cart[x] ===  itemId ) {
+				let newCart = [...cart];
+				newCart[x].quantity -= 1;
+				setCartItem(newCart);
+			}
+		} 
+	}
+
+
+	useEffect( () => {
+		console.log(cart);
+	}, [cart])
+
 
 	const spacer = ' | ';
 	return (
@@ -78,7 +115,10 @@ function App() {
 					</button>
 				</header>
 
-				<Cart items={cart}></Cart>
+				<Cart 
+					items={cart}
+					incrementFcn={incrementQuantity}
+					decrementFcn={decrementQuantity}/>
 
 				<Routes>
 					<Route path="/" element={<Home />} />
