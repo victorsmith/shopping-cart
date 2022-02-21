@@ -71,21 +71,27 @@ function App() {
 	}
 
 
-	function incrementQuantity (itemId) {
+	function decrementQuantity (itemId) {
 		for (let x = 0; x < cart.length; x++) {
 			if (cart[x] === itemId) {
-				let newCart = [...cart];
-				newCart[x].quantity += 1;
-				setCartItem(newCart);
+				if (cart[x].quantity === 0 ) {
+					alert("Ooops! Quantity is already at zero")
+					return
+				} else {
+					let newCart = [...cart];
+					newCart[x].quantity -= 1;
+					setCartItem(newCart);
+				}
 			}
+
 		} 
 	}	
 	
-	function decrementQuantity(itemId) {
+	function incrementQuantity(itemId) {
 		for (let x=0; x<cart.length; x++) {
 			if ( cart[x] ===  itemId ) {
 				let newCart = [...cart];
-				newCart[x].quantity -= 1;
+				newCart[x].quantity += 1;
 				setCartItem(newCart);
 			}
 		} 
